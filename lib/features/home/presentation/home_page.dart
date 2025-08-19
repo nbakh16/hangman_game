@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../game/game.dart';
 
 class HomePage extends StatelessWidget {
   static const route = 'home';
@@ -8,7 +11,12 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text('Home'),
+        child: ElevatedButton(
+          onPressed: () {
+            context.pushNamed(GamePage.route);
+          },
+          child: Text('Start'),
+        ),
       ),
     );
   }
