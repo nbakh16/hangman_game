@@ -42,7 +42,7 @@ class GamePage extends StatelessWidget {
       },
       child: Scaffold(
         body: SafeArea(
-          child: SingleChildScrollView(
+          child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Container(
               alignment: Alignment.center,
@@ -76,28 +76,37 @@ class GamePage extends StatelessWidget {
 
   Widget _buildGameUI(BuildContext context, int lives, String word, Set<String> guessedLetters, bool isPlaying) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      spacing: 12,
       children: [
         Text(
           'Score: 0',
           style: Theme.of(context).textTheme.titleLarge,
         ),
-        Image.asset(
-          'assets/hangman/${6 - lives}.png',
-          height: MediaQuery.of(context).size.height * 0.4,
-          fit: BoxFit.fitHeight,
-          color: Colors.white,
+        Expanded(
+          child: Image.asset(
+            'assets/hangman/${6 - lives}.png',
+            height: MediaQuery.of(context).size.height * 0.4,
+            fit: BoxFit.contain,
+            color: Colors.white,
+          ),
         ),
-        const SizedBox(height: 20),
-        Text(
-          word.split('').join(' '),
-          style: Theme.of(context).textTheme.headlineMedium?.copyWith(letterSpacing: 2),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: FittedBox(
+            child: Text(
+              word.split('').join(' '),
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(letterSpacing: 2),
+            ),
+          ),
         ),
-        const SizedBox(height: 20),
         GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 7,
             mainAxisSpacing: 8,
             crossAxisSpacing: 8,
+            childAspectRatio: 1,
           ),
           itemCount: 26,
           shrinkWrap: true,
@@ -114,13 +123,14 @@ class GamePage extends StatelessWidget {
                     },
               style: ElevatedButton.styleFrom(
                 shape: const CircleBorder(),
-                padding: const EdgeInsets.all(12),
+                padding: const EdgeInsets.all(8),
                 backgroundColor: isGuessed ? Colors.grey.shade700 : null,
               ),
-              child: Text(char),
+              child: FittedBox(child: Text(char)),
             );
           },
         ),
+        const SizedBox(),
       ],
     );
   }
