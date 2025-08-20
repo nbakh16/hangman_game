@@ -15,6 +15,11 @@ class AppColor {
   static const Color grey = Colors.grey;
   static const Color textLight = Colors.white;
   static const Color textDark = Colors.black;
+
+  static List<Color> blueGradient = [Color(0xFF007BFF), Color(0xFF5AC8FA)];
+  static List<Color> greenGradient = [Color(0xFF32CD32), Color(0xFF00FFAA)];
+  static List<Color> redGradient = [Color(0xFFDD2362), Color(0xFFFF5E9D)];
+  static List<Color> yellowGradient = [Color(0xFFFFA500), Color(0xFFFFD700)];
 }
 
 /// Darken a color by [percent] amount (100 = black)

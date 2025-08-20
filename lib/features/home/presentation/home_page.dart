@@ -38,7 +38,7 @@ class HomePage extends StatelessWidget {
 
   Widget _buildButtons(BuildContext context) {
     return Column(
-      spacing: 28,
+      spacing: 8,
       children: [
         MenuButton(
           onTap: () {
@@ -46,7 +46,7 @@ class HomePage extends StatelessWidget {
           },
           title: 'Quick Game',
           subTitle: 'Play game with random modifier',
-          bgColor: AppColor.blue,
+          gradientColor: AppColor.blueGradient,
         ),
         MenuButton(
           onTap: () {
@@ -54,15 +54,15 @@ class HomePage extends StatelessWidget {
           },
           title: 'Custom Game',
           subTitle: 'Choose how you wanna play',
-          bgColor: AppColor.yellow,
+          gradientColor: AppColor.yellowGradient,
         ),
         MenuButton(
-          onTap: () {
-            // context.pushNamed(GamePage.route);
-          },
+          // onTap: () {
+          //   // context.pushNamed(GamePage.route);
+          // },
           title: 'Challenge',
           subTitle: 'Challenge friend with your word',
-          bgColor: AppColor.green,
+          gradientColor: AppColor.greenGradient,
         ),
         MenuButton(
           onTap: () {
@@ -70,7 +70,7 @@ class HomePage extends StatelessWidget {
           },
           title: '1v1',
           subTitle: 'Play with friend locally, head to head',
-          bgColor: AppColor.red,
+          gradientColor: AppColor.redGradient,
         ),
       ],
     );
