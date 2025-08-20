@@ -1,7 +1,8 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '../../features/game/presentation/game_page.dart';
-import '../../features/home/presentation/home_page.dart';
-import '../../features/splash/presentation/splash_page.dart';
+import '../../features/game/game.dart';
+import '../../features/home/home.dart';
+import '../../features/splash/splash.dart';
 import 'error_page.dart';
 
 class AppRouter {
@@ -24,7 +25,10 @@ class AppRouter {
       GoRoute(
         path: '/${GamePage.route}',
         name: GamePage.route,
-        builder: (context, state) => const GamePage(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => GameCubit(GameRepositoryImpl()),
+          child: const GamePage(),
+        ),
       ),
     ],
     errorBuilder: (context, state) => const ErrorPage(),
