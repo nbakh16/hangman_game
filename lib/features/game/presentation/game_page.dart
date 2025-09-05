@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hangman_game/core/core.dart';
-
 import '../game.dart';
 
 class GamePage extends StatelessWidget {
@@ -49,47 +47,40 @@ class GamePage extends StatelessWidget {
       },
       child: Scaffold(
         body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Container(
-              alignment: Alignment.center,
-              child: // Inside your GameView's build method
-              BlocBuilder<GameCubit, GameState>(
-                builder: (context, state) {
-                  switch (state) {
-                    case GameInitial():
-                      return const Center(child: CircularProgressIndicator());
+          child: BlocBuilder<GameCubit, GameState>(
+            builder: (context, state) {
+              switch (state) {
+                case GameInitial():
+                  return const Center(child: CircularProgressIndicator());
 
-                    case final GamePlaying s:
-                      return _buildGameUI(
-                        context,
-                        lives: s.gameModel.lives,
-                        word: s.maskedWord,
-                        guessedLetters: s.guessedLetters,
-                        isPlaying: true,
-                      );
+                case final GamePlaying s:
+                  return _buildGameUI(
+                    context,
+                    lives: s.gameModel.lives,
+                    word: s.maskedWord,
+                    guessedLetters: s.guessedLetters,
+                    isPlaying: true,
+                  );
 
-                    case final GameWon s:
-                      return _buildGameUI(
-                        context,
-                        lives: 6,
-                        word: s.word,
-                        guessedLetters: s.guessedLetters,
-                        isPlaying: false,
-                      );
+                case final GameWon s:
+                  return _buildGameUI(
+                    context,
+                    lives: 6,
+                    word: s.word,
+                    guessedLetters: s.guessedLetters,
+                    isPlaying: false,
+                  );
 
-                    case final GameLost s:
-                      return _buildGameUI(
-                        context,
-                        lives: 0,
-                        word: s.word,
-                        guessedLetters: s.guessedLetters,
-                        isPlaying: false,
-                      );
-                  }
-                },
-              ),
-            ),
+                case final GameLost s:
+                  return _buildGameUI(
+                    context,
+                    lives: 0,
+                    word: s.word,
+                    guessedLetters: s.guessedLetters,
+                    isPlaying: false,
+                  );
+              }
+            },
           ),
         ),
       ),
@@ -120,7 +111,7 @@ class GamePage extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8),
+          padding: const EdgeInsets.symmetric(vertical: 18),
           child: FittedBox(
             child: Text(
               word.split('').join(' '),
@@ -128,49 +119,12 @@ class GamePage extends StatelessWidget {
             ),
           ),
         ),
-        GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 7,
-            mainAxisSpacing: 8,
-            crossAxisSpacing: 8,
-            childAspectRatio: 1,
-          ),
-          itemCount: 26,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) {
-            final char = String.fromCharCode('A'.codeUnitAt(0) + index);
-            final isGuessed = guessedLetters.contains(char);
-
-            Color borderColor = Colors.transparent;
-            if (isGuessed) {
-              if (word.contains(char)) {
-                borderColor = AppColor.green;
-              } else {
-                borderColor = AppColor.red;
-              }
-            }
-
-            return ElevatedButton(
-              onPressed: (isGuessed || !isPlaying)
-                  ? null // Disable button if guessed or if the game is over
-                  : () {
-                      context.read<GameCubit>().guessLetter(char);
-                    },
-              style: ElevatedButton.styleFrom(
-                shape: CircleBorder(
-                  side: BorderSide(color: borderColor, width: 2),
-                ),
-                padding: const EdgeInsets.all(8),
-                // backgroundColor: isGuessed ? Colors.grey.shade700 : null,
-                disabledBackgroundColor: Colors.grey.shade700,
-                disabledForegroundColor: Colors.white,
-              ),
-              child: FittedBox(child: Text(char)),
-            );
-          },
+        KeyboardLayout(
+          word: word,
+          guessedLetters: guessedLetters,
+          isPlaying: isPlaying,
         ),
-        const SizedBox(),
+        const SizedBox(height: 42),
       ],
     );
   }
