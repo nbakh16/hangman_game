@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../custom_game/domain/difficulty_enum.dart';
 import '../game.dart';
 
 part 'game_state.dart';
@@ -12,11 +13,11 @@ class GameCubit extends Cubit<GameState> {
     startGame();
   }
 
-  void startGame() {
-    final word = _gameRepository.getNewWord();
+  void startGame({Difficulty? difficulty}) {
+    final word = _gameRepository.getNewWord(difficulty: difficulty);
     emit(
       GamePlaying(
-        gameModel: GameModel(word: word, lives: 6),
+        gameModel: GameModel(wordModel: word, lives: 6),
         guessedLetters: const {},
       ),
     );
@@ -30,16 +31,16 @@ class GameCubit extends Cubit<GameState> {
     final guessed = Set<String>.from(currentState.guessedLetters)..add(letter);
     final game = currentState.gameModel;
 
-    final isWrongGuess = !game.word.contains(letter);
+    final isWrongGuess = !game.wordModel.word.contains(letter);
     final livesLeft = isWrongGuess ? game.lives - 1 : game.lives;
 
-    final isWin = game.word.split('').every((char) => guessed.contains(char));
+    final isWin = game.wordModel.word.split('').every((char) => guessed.contains(char));
     final isLoss = livesLeft == 0;
 
     if (isWin) {
-      emit(GameWon(game.word, guessed));
+      emit(GameWon(game.wordModel, guessed));
     } else if (isLoss) {
-      emit(GameLost(game.word, guessed));
+      emit(GameLost(game.wordModel, guessed));
     } else {
       // If still playing, emit a new GamePlaying state with updated data.
       emit(

@@ -40,9 +40,9 @@ class GamePage extends StatelessWidget {
     return BlocListener<GameCubit, GameState>(
       listener: (context, state) {
         if (state is GameWon) {
-          _showEndGameDialog(context, true, state.word);
+          _showEndGameDialog(context, true, state.wordModel.word);
         } else if (state is GameLost) {
-          _showEndGameDialog(context, false, state.word);
+          _showEndGameDialog(context, false, state.wordModel.word);
         }
       },
       child: Scaffold(
@@ -66,7 +66,7 @@ class GamePage extends StatelessWidget {
                   return _buildGameUI(
                     context,
                     lives: 6,
-                    word: s.word,
+                    word: s.wordModel.word,
                     guessedLetters: s.guessedLetters,
                     isPlaying: false,
                   );
@@ -75,7 +75,7 @@ class GamePage extends StatelessWidget {
                   return _buildGameUI(
                     context,
                     lives: 0,
-                    word: s.word,
+                    word: s.wordModel.word,
                     guessedLetters: s.guessedLetters,
                     isPlaying: false,
                   );

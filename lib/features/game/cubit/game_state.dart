@@ -17,7 +17,7 @@ final class GamePlaying extends GameState {
 
   // Helper getter for the UI.
   String get maskedWord {
-    return gameModel.word.split('').map((letter) => guessedLetters.contains(letter) ? letter : '?').join(' ');
+    return gameModel.wordModel.word.split('').map((letter) => guessedLetters.contains(letter) ? letter : '?').join(' ');
   }
 
   @override
@@ -25,19 +25,19 @@ final class GamePlaying extends GameState {
 }
 
 final class GameWon extends GameState {
-  final String word;
+  final WordModel wordModel;
   final Set<String> guessedLetters;
 
-  const GameWon(this.word, this.guessedLetters);
+  const GameWon(this.wordModel, this.guessedLetters);
   @override
-  List<Object> get props => [word, guessedLetters];
+  List<Object> get props => [wordModel, guessedLetters];
 }
 
 final class GameLost extends GameState {
-  final String word;
+  final WordModel wordModel;
   final Set<String> guessedLetters;
 
-  const GameLost(this.word, this.guessedLetters);
+  const GameLost(this.wordModel, this.guessedLetters);
   @override
-  List<Object> get props => [word, guessedLetters];
+  List<Object> get props => [wordModel, guessedLetters];
 }

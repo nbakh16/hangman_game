@@ -1,24 +1,25 @@
 import 'package:equatable/equatable.dart';
+import 'package:hangman_game/features/game/game.dart';
 
 class GameModel extends Equatable {
-  final String word;
+  final WordModel wordModel;
   final int lives;
 
   const GameModel({
-    required this.word,
+    required this.wordModel,
     required this.lives,
   });
 
   GameModel copyWith({
-    String? word,
+    WordModel? wordModel,
     int? lives,
   }) {
     return GameModel(
-      word: word ?? this.word,
+      wordModel: wordModel ?? this.wordModel,
       lives: lives ?? this.lives,
     );
   }
 
   @override
-  List<Object?> get props => [word, lives];
+  List<Object?> get props => [wordModel, lives];
 }

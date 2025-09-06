@@ -5,3 +5,4 @@ export 'data/word_list.dart';
 export 'data/game_repository_impl.dart';
 export 'domain/game_repository.dart';
 export 'domain/game_model.dart';
+export 'domain/word_model.dart';
