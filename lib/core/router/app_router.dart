@@ -19,25 +19,27 @@ class AppRouter {
         builder: (context, state) => const SplashPage(),
       ),
       GoRoute(
-        path: '/${HomePage.route}',
+        path: '/', //${HomePage.route}',
         name: HomePage.route,
         builder: (context, state) => const HomePage(),
-      ),
-      GoRoute(
-        path: '/${GamePage.route}',
-        name: GamePage.route,
-        builder: (context, state) => BlocProvider(
-          create: (context) => GameCubit(GameRepositoryImpl()),
-          child: GamePage(difficulty: state.extra as Difficulty?),
-        ),
-      ),
-      GoRoute(
-        path: '/${CustomGamePage.route}',
-        name: CustomGamePage.route,
-        builder: (context, state) => BlocProvider(
-          create: (context) => DifficultyCubit(),
-          child: const CustomGamePage(),
-        ),
+        routes: [
+          GoRoute(
+            path: GamePage.route,
+            name: GamePage.route,
+            builder: (context, state) => BlocProvider(
+              create: (context) => GameCubit(GameRepositoryImpl()),
+              child: GamePage(difficulty: state.extra as Difficulty?),
+            ),
+          ),
+          GoRoute(
+            path: CustomGamePage.route,
+            name: CustomGamePage.route,
+            builder: (context, state) => BlocProvider(
+              create: (context) => DifficultyCubit(),
+              child: const CustomGamePage(),
+            ),
+          ),
+        ],
       ),
     ],
     errorBuilder: (context, state) => const ErrorPage(),

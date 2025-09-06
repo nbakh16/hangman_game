@@ -108,7 +108,7 @@ class CustomGamePage extends StatelessWidget {
                     const Spacer(),
                     ElevatedButton(
                       onPressed: () {
-                        context.pushNamed(GamePage.route, extra: state.difficulty);
+                        context.goNamed(GamePage.route, extra: state.difficulty);
                       },
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 16),
