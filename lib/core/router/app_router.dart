@@ -35,7 +35,7 @@ class AppRouter {
         path: '/${CustomGamePage.route}',
         name: CustomGamePage.route,
         builder: (context, state) => BlocProvider(
-          create: (context) => CustomGameCubit(),
+          create: (context) => DifficultyCubit(),
           child: const CustomGamePage(),
         ),
       ),

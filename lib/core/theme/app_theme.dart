@@ -53,6 +53,21 @@ class AppTheme {
     ),
     dividerTheme: DividerThemeData(color: Colors.grey.shade300, thickness: 1.5),
     shadowColor: Colors.grey.withValues(alpha: 0.4),
+    sliderTheme: SliderThemeData(
+      trackHeight: 22,
+      activeTrackColor: Colors.white,
+      inactiveTrackColor: Colors.grey.shade300,
+      thumbColor: AppColor.primary,
+      activeTickMarkColor: Colors.transparent,
+      inactiveTickMarkColor: AppColor.primary.withValues(alpha: 0.33),
+      thumbShape: RoundSliderThumbShape(
+        enabledThumbRadius: 16.0,
+        elevation: 1,
+        pressedElevation: 4,
+      ),
+      overlayShape: RoundSliderThumbShape(enabledThumbRadius: 18),
+      showValueIndicator: ShowValueIndicator.never,
+    ),
   );
 
   static final ThemeData dark = ThemeData(
@@ -105,6 +120,21 @@ class AppTheme {
       // labelPadding: EdgeInsets.only(top: 8),
     ),
     dividerTheme: const DividerThemeData(color: Colors.grey, thickness: 1.75),
+    sliderTheme: SliderThemeData(
+      trackHeight: 22,
+      activeTrackColor: Colors.white,
+      inactiveTrackColor: Colors.grey.shade300,
+      thumbColor: AppColor.primary,
+      activeTickMarkColor: Colors.transparent,
+      inactiveTickMarkColor: AppColor.primary.withValues(alpha: 0.33),
+      thumbShape: RoundSliderThumbShape(
+        enabledThumbRadius: 16.0,
+        elevation: 1,
+        pressedElevation: 4,
+      ),
+      overlayShape: RoundSliderThumbShape(enabledThumbRadius: 18),
+      showValueIndicator: ShowValueIndicator.never,
+    ),
   );
 
   ///TextTheme
