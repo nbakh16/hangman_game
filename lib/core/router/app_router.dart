@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import '../../features/custom_game/custom_game.dart';
 import '../../features/game/game.dart';
 import '../../features/home/home.dart';
 import '../../features/splash/splash.dart';
@@ -28,6 +29,14 @@ class AppRouter {
         builder: (context, state) => BlocProvider(
           create: (context) => GameCubit(GameRepositoryImpl()),
           child: const GamePage(),
+        ),
+      ),
+      GoRoute(
+        path: '/${CustomGamePage.route}',
+        name: CustomGamePage.route,
+        builder: (context, state) => BlocProvider(
+          create: (context) => CustomGameCubit(),
+          child: const CustomGamePage(),
         ),
       ),
     ],

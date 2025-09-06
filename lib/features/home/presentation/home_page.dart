@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hangman_game/core/core.dart';
 
 import '../../../widgets/widgets.dart';
+import '../../custom_game/custom_game.dart';
 import '../../game/game.dart';
 
 class HomePage extends StatelessWidget {
@@ -45,31 +46,31 @@ class HomePage extends StatelessWidget {
             context.pushNamed(GamePage.route);
           },
           title: 'Quick Game',
-          subTitle: 'Play game with random modifier',
+          subTitle: 'Play game with random modifiers',
           gradientColor: AppColor.blueGradient,
         ),
         MenuButton(
           onTap: () {
-            // context.pushNamed(GamePage.route);
+            context.pushNamed(CustomGamePage.route);
           },
           title: 'Custom Game',
           subTitle: 'Choose how you wanna play',
           gradientColor: AppColor.yellowGradient,
         ),
         MenuButton(
-          // onTap: () {
-          //   // context.pushNamed(GamePage.route);
-          // },
+          onTap: () {
+            // context.pushNamed(GamePage.route);
+          },
           title: 'Challenge',
           subTitle: 'Challenge friend with your word',
           gradientColor: AppColor.greenGradient,
         ),
         MenuButton(
-          onTap: () {
-            // context.pushNamed(GamePage.route);
-          },
+          // onTap: () {
+          //   // context.pushNamed(GamePage.route);
+          // },
           title: '1v1',
-          subTitle: 'Play with friend locally, head to head',
+          subTitle: 'Play with friend head to head',
           gradientColor: AppColor.redGradient,
         ),
       ],
