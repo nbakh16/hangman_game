@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hangman_game/core/theme/app_color.dart';
+import 'package:hangman_game/features/game/presentation/game_page.dart';
 
 import '../custom_game.dart';
 
@@ -106,8 +108,7 @@ class CustomGamePage extends StatelessWidget {
                     const Spacer(),
                     ElevatedButton(
                       onPressed: () {
-                        //TODO
-                        print(state.difficulty);
+                        context.pushNamed(GamePage.route, extra: state.difficulty);
                       },
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 16),

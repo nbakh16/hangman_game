@@ -6,6 +6,7 @@ export 'utils/constants.dart';
 export 'utils/field_validate.dart';
 export 'utils/launch_url.dart';
 export 'utils/app_input_formatters.dart';
+export 'utils/extensions.dart';
 export 'cubit/global_cubit.dart';
 export 'l10n/l10n.dart';
 export 'l10n/languages.dart';

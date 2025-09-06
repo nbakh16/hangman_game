@@ -9,9 +9,7 @@ part 'game_state.dart';
 class GameCubit extends Cubit<GameState> {
   final GameRepository _gameRepository;
 
-  GameCubit(this._gameRepository) : super(GameInitial()) {
-    startGame();
-  }
+  GameCubit(this._gameRepository) : super(GameInitial());
 
   void startGame({Difficulty? difficulty}) {
     final word = _gameRepository.getNewWord(difficulty: difficulty);

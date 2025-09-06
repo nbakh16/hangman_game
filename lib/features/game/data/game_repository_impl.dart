@@ -17,6 +17,8 @@ class GameRepositoryImpl implements GameRepository {
       filteredList = kWordList.where((wordModel) => wordModel.difficulty == difficulty).toList();
     }
 
+    print(filteredList.length);
+
     return filteredList[random.nextInt(filteredList.length)];
   }
 }

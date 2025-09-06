@@ -28,7 +28,7 @@ class AppRouter {
         name: GamePage.route,
         builder: (context, state) => BlocProvider(
           create: (context) => GameCubit(GameRepositoryImpl()),
-          child: const GamePage(),
+          child: GamePage(difficulty: state.extra as Difficulty?),
         ),
       ),
       GoRoute(

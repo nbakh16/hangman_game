@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hangman_game/core/core.dart';
+import '../../custom_game/domain/difficulty_enum.dart';
 import '../game.dart';
 
-class GamePage extends StatelessWidget {
+class GamePage extends StatefulWidget {
   static const route = 'game';
-  const GamePage({super.key});
+  const GamePage({super.key, this.difficulty});
+
+  final Difficulty? difficulty;
+
+  @override
+  State<GamePage> createState() => _GamePageState();
+}
+
+class _GamePageState extends State<GamePage> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<GameCubit>().startGame(difficulty: widget.difficulty);
+  }
 
   // Temporary dialog, will change later
   void _showEndGameDialog(BuildContext context, bool isWon, String word) {
@@ -60,6 +75,7 @@ class GamePage extends StatelessWidget {
                     word: s.maskedWord,
                     guessedLetters: s.guessedLetters,
                     isPlaying: true,
+                    difficulty: widget.difficulty,
                   );
 
                 case final GameWon s:
@@ -69,6 +85,7 @@ class GamePage extends StatelessWidget {
                     word: s.wordModel.word,
                     guessedLetters: s.guessedLetters,
                     isPlaying: false,
+                    difficulty: widget.difficulty,
                   );
 
                 case final GameLost s:
@@ -78,6 +95,7 @@ class GamePage extends StatelessWidget {
                     word: s.wordModel.word,
                     guessedLetters: s.guessedLetters,
                     isPlaying: false,
+                    difficulty: widget.difficulty,
                   );
               }
             },
@@ -93,6 +111,7 @@ class GamePage extends StatelessWidget {
     required String word,
     required Set<String> guessedLetters,
     required bool isPlaying,
+    required Difficulty? difficulty,
   }) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -100,7 +119,7 @@ class GamePage extends StatelessWidget {
       spacing: 12,
       children: [
         Text(
-          'Score: 0',
+          difficulty == null ? 'Quick Game' : difficulty.name.capitalizeFirst(),
           style: Theme.of(context).textTheme.titleLarge,
         ),
         Expanded(
